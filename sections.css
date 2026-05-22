@@ -350,6 +350,7 @@
   justify-content: center;
 }
 @media (max-width: 900px) {
+  .phone-col { display: none; }
   .phone-pin { position: static; height: auto; padding: 20px 0 60px; }
   .scene { min-height: auto; opacity: 1; }
   .scene .phone-mobile-wrapper { margin-top: 32px; display: block; }
