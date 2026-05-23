@@ -264,12 +264,14 @@ p { margin: 0; }
    element WITHOUT relying on a transition (which is also paused when hidden). */
 body.force-revealed .fade-up,
 body.force-revealed .word,
-body.force-revealed .step .num,
-body.force-revealed .float-pill {
+body.force-revealed .step .num {
   opacity: 1 !important;
   transform: none !important;
   transition: none !important;
   animation: none !important;
+}
+body.force-revealed .float-pill {
+  opacity: 1 !important;
 }
 
 /* ---------- Noise overlay ---------- */

@@ -38,6 +38,7 @@ function App() {
       <Nav />
       <div id="top" />
       <Hero />
+      <Showcase />
       <OldWayCost />
       <Services />
       <Scrollytelling />
