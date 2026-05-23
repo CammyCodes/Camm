@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CammBot — AI that does the boring stuff for your business</title>
+  <meta name="description" content="Custom AI helpers for trades, property, services and small businesses. Quotes, emails, invoices, leads, admin — handled. Free chat. Free setup. You only pay when it works." />
+
+  <!-- Fonts: Fraunces (display), Geist (body), Geist Mono (mono/numbers) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,0..100&family=Fraunces:ital,opsz,wght,SOFT@1,9..144,300..700,0..100&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="sections.css" />
+
+  <!-- React + Babel (pinned) -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" data-presets="react" src="ui.jsx"></script>
+  <script type="text/babel" data-presets="react" src="sections-a.jsx"></script>
+  <script type="text/babel" data-presets="react" src="sections-b.jsx"></script>
+  <script type="text/babel" data-presets="react" src="app.jsx"></script>
+
+  <!-- Smooth scroll bootstrap (after Babel kicks in) -->
+  <script>
+    window.addEventListener("load", () => {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce || typeof Lenis === "undefined") return;
+      try {
+        const lenis = new Lenis({
+          duration: 1.1,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+        });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+        // anchor links
+        document.addEventListener("click", (e) => {
+          const a = e.target.closest('a[href^="#"]');
+          if (!a) return;
+          const id = a.getAttribute("href").slice(1);
+          if (!id) return;
+          const el = document.getElementById(id);
+          if (!el) return;
+          e.preventDefault();
+          lenis.scrollTo(el, { offset: -40, duration: 1.2 });
+        });
+      } catch (err) { console.warn("Lenis init failed", err); }
+    });
+  </script>
+</body>
+</html>
